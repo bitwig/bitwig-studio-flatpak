@@ -2,29 +2,32 @@
 all: clean build
 
 build:
-	-flatpak-builder --force-clean -v build-dir com.bitwig.BitwigStudio.yaml
-	-flatpak-builder --force-clean -v --repo=repo repo-build com.bitwig.BitwigStudio.yaml
+	-flatpak-builder --install-deps-from=flathub --force-clean -v build com.bitwig.BitwigStudio.yaml
+	-flatpak-builder --install-deps-from=flathub --force-clean -v --repo=repo repo-build com.bitwig.BitwigStudio.yaml
 
 clean:
-	-rm -fr build-dir
+	-rm -fr build
 	-rm -fr repo
 	-rm -fr repo-build
 
 clean-all:
-	-rm -fr build-dir
+	-rm -fr build
 	-rm -fr repo
 	-rm -fr repo-build
 	-rm -fr .flatpak-builder
 
 install:
-	-flatpak install bitwig com.bitwig.BitwigStudio
+	-flatpak-builder --install --force-clean build com.bitwig.BitwigStudio.yaml
 
 run:
-	-flatpak-builder --run build-dir/ com.bitwig.BitwigStudio.yaml com.bitwig.BitwigStudio
+	-flatpak-builder --run --log-session-bus --log-system-bus build/ com.bitwig.BitwigStudio.yaml com.bitwig.BitwigStudio
 
-run-debug:
-	-flatpak-builder --run build-dir/ com.bitwig.BitwigStudio.yaml sh
+run-installed:
+	-flatpak run --log-session-bus --log-system-bus com.bitwig.BitwigStudio
+
+debug-shell:
+	-flatpak-builder --run build/ com.bitwig.BitwigStudio.yaml sh
 
 uninstall:
-	-flatpak remove com.bitwig.BitwigStudio
+	-flatpak remove -y com.bitwig.BitwigStudio
 
