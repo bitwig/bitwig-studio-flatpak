@@ -1,11 +1,13 @@
 ---
 app-id: com.bitwig.BitwigStudio
-runtime: org.gnome.Platform
-runtime-version: 3.28
-sdk: org.gnome.Sdk
-sdk-extensions:
-  - org.freedesktop.Platform.ffmpeg
 command: com.bitwig.BitwigStudio
+runtime-version: "3.28"
+runtime: org.gnome.Platform
+sdk: org.gnome.Sdk
+
+rename-desktop-file: bitwig-studio.desktop
+rename-icon: bitwig-studio
+
 finish-args:
   - --device=all
   - --filesystem=home
@@ -17,6 +19,7 @@ finish-args:
   - --socket=x11
   - --talk-name=org.freedesktop.Notifications
   - --talk-name=org.jackaudio.service
+
 cleanup:
   - /include
   - /lib/pkgconfig
@@ -24,6 +27,7 @@ cleanup:
   - /share/man
   - '*.a'
   - '*.la'
+
 modules:
   - name: jack2
     buildsystem: simple
@@ -33,16 +37,12 @@ modules:
       - python3 waf install
     cleanup:
       - /bin
-      - /include
       - /lib/jack
-      - /lib/libjackserver.so*
-      - /lib/pkgconfig
       - /share
     sources:
       - type: git
         url: "https://github.com/jackaudio/jack2.git"
         tag: "v1.9.12"
-
   - name: libbsd
     buildsystem: autotools
     cleanup:
@@ -54,7 +54,6 @@ modules:
       - type: git
         url: "https://gitlab.freedesktop.org/libbsd/libbsd.git"
         tag: "0.9.1"
-
   - name: libbz2
     buildsystem: simple
     build-commands:
@@ -64,30 +63,26 @@ modules:
       - type: archive
         url: "https://fossies.org/linux/misc/bzip2-1.0.6.tar.gz"
         sha256: "a2848f34fcd5d6cf47def00461fcb528a0484d8edef8208d6d2e2909dc61d9cd"
-
   - name: "bitwig-studio"
     buildsystem: simple
     build-commands:
-      - ar x bitwig-studio-2.3.5.deb
+      - ar x bitwig-studio-2.4.3.deb
       - tar -xf data.tar.xz
       - mkdir -p /opt /app/bin /app/lib
       - cp -r opt/* /app
       - cp -r usr/* /app
-      - rm -f bin/bitwig-studio
+    post-install:
       - ln -sf ../bitwig-studio/bitwig-studio /app/bin/com.bitwig.BitwigStudio
-      - mv /app/share/icons/hicolor/48x48/apps/bitwig-modular.png /app/share/icons/hicolor/48x48/apps/com.bitwig-BitwigStudio-modular.png
-      - mv /app/share/icons/hicolor/48x48/apps/bitwig-studio.png /app/share/icons/hicolor/48x48/apps/com.bitwig-BitwigStudio.png
-      - mv /app/share/icons/hicolor/scalable/apps/bitwig-modular.svg /app/share/icons/hicolor/scalable/apps/com.bitwig.BitwigStudio-modular.svg
-      - mv /app/share/icons/hicolor/scalable/apps/bitwig-studio.svg /app/share/icons/hicolor/scalable/apps/com.bitwig.BitwigStudio.svg
-      - mv /app/share/applications/bitwig-studio.desktop /app/share/applications/com.bitwig.BitwigStudio.desktop
+      - rm -f /app/bin/bitwig-studio
       - mv /app/share/mime/packages/bitwig-studio.xml /app/share/mime/packages/com.bitwig.BitwigStudio.xml
-      - sed -ri 's@/usr/bin/bitwig-studio@/app/bin/com.bitwig.BitwigStudio@' /app/share/applications/com.bitwig.BitwigStudio.desktop
-      - sed -ri 's@bitwig-studio.png@com.bitwig.BitwigStudio@' /app/share/applications/com.bitwig.BitwigStudio.desktop
-      - sed -ri 's@Multimedia;@@' /app/share/applications/com.bitwig.BitwigStudio.desktop
+      - sed -ri 's@/usr/bin/bitwig-studio@/app/bin/com.bitwig.BitwigStudio@' /app/share/applications/bitwig-studio.desktop
+      - sed -ri 's@Multimedia;@@' /app/share/applications/bitwig-studio.desktop
+      - sed -ri 's@bitwig-studio.png@com.bitwig.BitwigStudio@' /app/share/applications/bitwig-studio.desktop
+      - update-mime-database /app/share/mime
     sources:
       - type: file
-        url: http://downloads.bitwig.com/stable/2.3.5/bitwig-studio-2.3.5.deb
-        sha256: 4ce715cdd819a7d42e2dcb829a1590205f289cf589c253cb7748510c11f8c2ec
+        url: https://downloads-na.bitwig.com/stable/2.4.3/bitwig-studio-2.4.3.deb
+        sha256: 08c4863acdcebda92fad8c366da605abbd31e28e8d22dae54ef283688927e59c
         only-arches:
           - x86_64
           - i386
