@@ -66,6 +66,20 @@ And make myself member of the jackuser and pulse-rt groups:
 
 Then, just logout and back in.
 
+Known Issues
+============
+
+No sound while using jack
+--------------------------
+Sometimes, I have no sound while using jack. In those cases, I just do this:
+
+.. code:: bash
+
+   amixer -c 0 cset name='Sample Clock Source' ADAT; sleep 2; amixer -c 0 cset name='Sample Clock Source' Internal
+
+Basically, that's a one-liner to set the clock to ADAT and back to Internal in my Focusrite 18i20. You can use alsamixer as well and
+go to the end of the channel lane and change clock source manually.
+
 Help me!
 ========
 Help me improve this:
