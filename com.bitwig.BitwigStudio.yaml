@@ -18,7 +18,6 @@ finish-args:
   - --socket=wayland
   - --socket=x11
   - --talk-name=org.freedesktop.Notifications
-  - --talk-name=org.jackaudio.service
 
 cleanup:
   - /include
@@ -32,12 +31,10 @@ modules:
   - name: jack2
     buildsystem: simple
     build-commands:
-      - python3 waf configure --prefix=/app --htmldir=/app/share/doc/jack/ --freebob=no --dbus --autostart=dbus
+      - python3 waf configure --prefix=/app --htmldir=/app/share/doc/jack/ --freebob=no --autostart=default
       - python3 waf build -j $FLATPAK_BUILDER_N_JOBS
       - python3 waf install
     cleanup:
-      - /bin
-      - /lib/jack
       - /share
     sources:
       - type: git
@@ -72,8 +69,8 @@ modules:
       - cp -r opt/* /app
       - cp -r usr/* /app
     post-install:
-      - ln -sf ../bitwig-studio/bitwig-studio /app/bin/com.bitwig.BitwigStudio
       - rm -f /app/bin/bitwig-studio
+      - install -Dm555 -t /app/bin com.bitwig.BitwigStudio
       - mv /app/share/mime/packages/bitwig-studio.xml /app/share/mime/packages/com.bitwig.BitwigStudio.xml
       - sed -ri 's@/usr/bin/bitwig-studio@/app/bin/com.bitwig.BitwigStudio@' /app/share/applications/bitwig-studio.desktop
       - sed -ri 's@Multimedia;@@' /app/share/applications/bitwig-studio.desktop
@@ -86,5 +83,8 @@ modules:
         only-arches:
           - x86_64
           - i386
+      - type: file
+        path: "files/com.bitwig.BitwigStudio"
+        sha256: 284d614cca0967cc4984c2255b25cee9de53a34f61cc3ab0efc39569ef3fde87
 
 # vim: set expandtab tabstop=2 sw=2:
