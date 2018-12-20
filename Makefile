@@ -1,5 +1,5 @@
 .PHONY: all
-all: clean build
+all: clean build install
 
 build:
 	-flatpak-builder --install-deps-from=flathub --force-clean -v build com.bitwig.BitwigStudio.yaml
