@@ -4,10 +4,8 @@ command: com.bitwig.BitwigStudio
 runtime-version: "3.28"
 runtime: org.gnome.Platform
 sdk: org.gnome.Sdk
-
 rename-desktop-file: bitwig-studio.desktop
 rename-icon: bitwig-studio
-
 finish-args:
   - --device=all
   - --filesystem=home
@@ -18,7 +16,6 @@ finish-args:
   - --socket=wayland
   - --socket=x11
   - --talk-name=org.freedesktop.Notifications
-
 cleanup:
   - /include
   - /lib/pkgconfig
@@ -26,8 +23,46 @@ cleanup:
   - /share/man
   - '*.a'
   - '*.la'
-
 modules:
+  - name: "bitwig-studio"
+    buildsystem: simple
+    build-commands:
+      - ar x bitwig-studio-2.5beta2.deb
+      - tar -xf data.tar.xz
+      - mkdir -p /opt /app/bin /app/lib
+      - cp -r opt/* /app
+      - cp -r usr/* /app
+    post-install:
+      - rm -f /app/bin/bitwig-studio
+      - install -Dm555 -t /app/bin com.bitwig.BitwigStudio
+      - mv /app/share/mime/packages/bitwig-studio.xml /app/share/mime/packages/com.bitwig.BitwigStudio.xml
+      - sed -ri 's@/usr/bin/bitwig-studio@/app/bin/com.bitwig.BitwigStudio@' /app/share/applications/bitwig-studio.desktop
+      - sed -ri 's@Multimedia;@@' /app/share/applications/bitwig-studio.desktop
+      - sed -ri 's@bitwig-studio.png@com.bitwig.BitwigStudio@' /app/share/applications/bitwig-studio.desktop
+      - update-mime-database /app/share/mime
+    sources:
+      - type: file
+        url: https://downloads-na.bitwig.com/beta/2.5/bitwig-studio-2.5beta2.deb
+        sha256: b565a82f931a46671498e8f74178fc45bf97a77fa86fee59aac9b2649fd850cb
+        only-arches:
+          - x86_64
+          - i386
+      - type: file
+        path: "files/com.bitwig.BitwigStudio"
+        sha256: 284d614cca0967cc4984c2255b25cee9de53a34f61cc3ab0efc39569ef3fde87
+  - name: ffmpeg
+    cleanup:
+      - /include
+      - /lib/pkgconfig
+      - /share/ffmpeg/examples
+    config-opts:
+      - --disable-doc
+      - --disable-static
+      - --enable-shared
+    sources:
+      - type: git
+        url: "https://github.com/FFmpeg/FFmpeg.git"
+        tag: "n4.1"
   - name: jack2
     buildsystem: simple
     build-commands:
@@ -60,31 +95,5 @@ modules:
       - type: archive
         url: "https://fossies.org/linux/misc/bzip2-1.0.6.tar.gz"
         sha256: "a2848f34fcd5d6cf47def00461fcb528a0484d8edef8208d6d2e2909dc61d9cd"
-  - name: "bitwig-studio"
-    buildsystem: simple
-    build-commands:
-      - ar x bitwig-studio-2.5beta2.deb
-      - tar -xf data.tar.xz
-      - mkdir -p /opt /app/bin /app/lib
-      - cp -r opt/* /app
-      - cp -r usr/* /app
-    post-install:
-      - rm -f /app/bin/bitwig-studio
-      - install -Dm555 -t /app/bin com.bitwig.BitwigStudio
-      - mv /app/share/mime/packages/bitwig-studio.xml /app/share/mime/packages/com.bitwig.BitwigStudio.xml
-      - sed -ri 's@/usr/bin/bitwig-studio@/app/bin/com.bitwig.BitwigStudio@' /app/share/applications/bitwig-studio.desktop
-      - sed -ri 's@Multimedia;@@' /app/share/applications/bitwig-studio.desktop
-      - sed -ri 's@bitwig-studio.png@com.bitwig.BitwigStudio@' /app/share/applications/bitwig-studio.desktop
-      - update-mime-database /app/share/mime
-    sources:
-      - type: file
-        url: https://downloads-na.bitwig.com/beta/2.5/bitwig-studio-2.5beta2.deb
-        sha256: b565a82f931a46671498e8f74178fc45bf97a77fa86fee59aac9b2649fd850cb
-        only-arches:
-          - x86_64
-          - i386
-      - type: file
-        path: "files/com.bitwig.BitwigStudio"
-        sha256: 284d614cca0967cc4984c2255b25cee9de53a34f61cc3ab0efc39569ef3fde87
 
 # vim: set expandtab tabstop=2 sw=2:
