@@ -95,5 +95,14 @@ modules:
       - type: archive
         url: "https://fossies.org/linux/misc/bzip2-1.0.6.tar.gz"
         sha256: "a2848f34fcd5d6cf47def00461fcb528a0484d8edef8208d6d2e2909dc61d9cd"
+  - name: dbus-python
+    buildsystem: simple
+    build-commands:
+      - pip2 install --install-option="--prefix=/app" --no-deps .
+    sources:
+      - type: git
+        url: https://gitlab.freedesktop.org/dbus/dbus-python
+        tag: dbus-python-1.2.8
+
 
 # vim: set expandtab tabstop=2 sw=2:
