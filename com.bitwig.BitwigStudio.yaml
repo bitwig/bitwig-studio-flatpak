@@ -27,7 +27,7 @@ modules:
   - name: "bitwig-studio"
     buildsystem: simple
     build-commands:
-      - ar x bitwig-studio-2.5beta2.deb
+      - ar x bitwig-studio-2.5beta3.deb
       - tar -xf data.tar.xz
       - mkdir -p /opt /app/bin /app/lib
       - cp -r opt/* /app
@@ -42,14 +42,14 @@ modules:
       - update-mime-database /app/share/mime
     sources:
       - type: file
-        url: https://downloads-na.bitwig.com/beta/2.5/bitwig-studio-2.5beta2.deb
-        sha256: b565a82f931a46671498e8f74178fc45bf97a77fa86fee59aac9b2649fd850cb
+        url: https://downloads-na.bitwig.com/beta/2.5/bitwig-studio-2.5beta3.deb
+        sha512: 5960d6db83c73715cf75f3e0a7d8ae4e4e2aba0b283cce5725b221c6948e4b0b7719eeb13bfdb82ba99035cc47c076e1b08587d1f1d464caef3e74fe7012a6fc
         only-arches:
           - x86_64
           - i386
       - type: file
         path: "files/com.bitwig.BitwigStudio"
-        sha256: 284d614cca0967cc4984c2255b25cee9de53a34f61cc3ab0efc39569ef3fde87
+        sha512: 65f89bb610bf59bb16978a256f4297929ccaa97f5c5b48696b3c50386e96e528f872f346785c6066be592c371f1d1c5a41d641a32479152777bf691605ad3d7b
   - name: ffmpeg
     cleanup:
       - /include
@@ -94,7 +94,7 @@ modules:
     sources:
       - type: archive
         url: "https://fossies.org/linux/misc/bzip2-1.0.6.tar.gz"
-        sha256: "a2848f34fcd5d6cf47def00461fcb528a0484d8edef8208d6d2e2909dc61d9cd"
+        sha512: 00ace5438cfa0c577e5f578d8a808613187eff5217c35164ffe044fbafdfec9e98f4192c02a7d67e01e5a5ccced630583ad1003c37697219b0f147343a3fdd12
   - name: dbus-python
     buildsystem: simple
     build-commands:
