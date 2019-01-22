@@ -9,6 +9,7 @@ clean:
 	-rm -fr build
 	-rm -fr repo
 	-rm -fr repo-build
+	-rm -fr .flatpak-builder/builds
 
 clean-all:
 	-rm -fr build
@@ -30,4 +31,7 @@ debug-shell:
 
 uninstall:
 	-flatpak remove -y com.bitwig.BitwigStudio
+
+get-sum:
+	-curl -s $(url) | sha512sum
 
