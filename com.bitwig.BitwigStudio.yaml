@@ -27,7 +27,7 @@ modules:
   - name: "bitwig-studio"
     buildsystem: simple
     build-commands:
-      - ar x bitwig-studio-2.5beta3.deb
+      - ar x bitwig-studio-2.5beta4.deb
       - tar -xf data.tar.xz
       - mkdir -p /opt /app/bin /app/lib
       - cp -r opt/* /app
@@ -42,8 +42,8 @@ modules:
       - update-mime-database /app/share/mime
     sources:
       - type: file
-        url: https://downloads-na.bitwig.com/beta/2.5/bitwig-studio-2.5beta3.deb
-        sha512: 5960d6db83c73715cf75f3e0a7d8ae4e4e2aba0b283cce5725b221c6948e4b0b7719eeb13bfdb82ba99035cc47c076e1b08587d1f1d464caef3e74fe7012a6fc
+        url: https://downloads-na.bitwig.com/beta/2.5/bitwig-studio-2.5beta4.deb
+        sha512: deaf9f81650f2e0875fa45f2f1f0298f193b2a132704c42c138fdcb6974b75fae20210b2b27294a18effa7e8d0dd4d6f1397904b05d0a32dca2bdbf00abe9995
         only-arches:
           - x86_64
           - i386
