@@ -15,7 +15,7 @@ Instructions
 
    DEVICE=hw:USB
    RATE=48000
-   PERIOD=128
+   PERIOD=256
    NUMBER_OF_PERIODS=2
 
 Where:
