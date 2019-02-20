@@ -18,7 +18,7 @@ clean-all:
 	-rm -fr .flatpak-builder
 
 install:
-	-flatpak-builder --install --force-clean build com.bitwig.BitwigStudio.yaml
+	-flatpak-builder --user --install --force-clean build com.bitwig.BitwigStudio.yaml
 
 run:
 	-flatpak-builder --run --log-session-bus --log-system-bus build/ com.bitwig.BitwigStudio.yaml com.bitwig.BitwigStudio

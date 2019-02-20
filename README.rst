@@ -39,6 +39,11 @@ If you're not planing on using jack, just touch the file:
 
    touch ~/.BitwigStudio/jack-config
 
+.. warning::
+   Recently, Bitwig started distributing the deb file through a CDN that doesn't allow you to download directly. Please, in order
+   for this to work, download the deb file and put it in ``/home/your-user/Downloads`` or somewhere you know, then, edit the yaml
+   file to point ``modules.name["bitwig-studio"].sources.path`` to your deb file. Yeah, what a drag...
+
 Realtime
 --------
 If you want to use realtime, I had to set my limits like this:
