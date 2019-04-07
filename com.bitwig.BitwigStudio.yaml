@@ -1,7 +1,7 @@
 ---
 app-id: com.bitwig.BitwigStudio
 command: com.bitwig.BitwigStudio
-runtime-version: "3.28"
+runtime-version: "3.32"
 runtime: org.gnome.Platform
 sdk: org.gnome.Sdk
 rename-desktop-file: bitwig-studio.desktop
@@ -66,9 +66,9 @@ modules:
   - name: jack2
     buildsystem: simple
     build-commands:
-      - python3 waf configure --prefix=/app --htmldir=/app/share/doc/jack/ --freebob=no --autostart=default
-      - python3 waf build -j $FLATPAK_BUILDER_N_JOBS
-      - python3 waf install
+      - python2 waf configure --prefix=/app --htmldir=/app/share/doc/jack/ --freebob=no --autostart=default
+      - python2 waf build -j $FLATPAK_BUILDER_N_JOBS
+      - python2 waf install
     cleanup:
       - /share
     sources:
