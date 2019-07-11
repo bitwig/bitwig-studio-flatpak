@@ -1,4 +1,4 @@
-build:
+build: com.bitwig.BitwigStudio.yaml
 	flatpak-builder --install-deps-from=flathub --force-clean -v build com.bitwig.BitwigStudio.yaml
 	flatpak-builder --install-deps-from=flathub --force-clean -v --repo=repo repo-build com.bitwig.BitwigStudio.yaml
 
