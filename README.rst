@@ -39,11 +39,6 @@ If you're not planing on using jack, just touch the file:
 
    touch ~/.BitwigStudio/jack-config
 
-.. warning::
-   Recently, Bitwig started distributing the deb file through a CDN that doesn't allow you to download directly. Please, in order
-   for this to work, download the deb file and put it in ``/home/your-user/Downloads`` or somewhere you know, then, edit the yaml
-   file to point ``modules.name["bitwig-studio"].sources.path`` to your deb file. Yeah, what a drag...
-
 Realtime
 --------
 If you want to use realtime, I had to set my limits like this:
@@ -71,34 +66,6 @@ And make myself member of the jackuser and pulse-rt groups:
 
 Then, just logout and back in.
 
-Beta installation
-=================
-For now, if you're to install the beta version, you need to:
-
-* Download the beta package yourself and put it in a known location (doh.. just trying to be specific)
-* Get the ``sha512`` of it.
-* modify the yaml file in order to set these right.
-
-This is because only registered users have the right to try out the beta version.
-
-Here's a quick run over the procedure:
-
-.. code:: bash
-
-    # open a web browser, go to bitwig.com and get the .deb file from your account.
-    # Put it in /home/user/Downloads
-
-    # get the sha512 sum
-    sha512sum /home/user/Downloads/bitwig-studio-2.5beta8.deb
-
-    # edit the com.bitwig.BitwigStudio.yaml and
-    # * set the filename right in line ~30
-    # * set the right path to the deb file in line ~45
-    # * set the sha512 sum in line ~46
-
-    # continue the build process normally
-    make
-
 Known Issues
 ============
 
@@ -119,3 +86,4 @@ Help me improve this:
 
 * write better instructions
 * better flatpack file
+* optimize the ffmpeg build (build only what is needed)
