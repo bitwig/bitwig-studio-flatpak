@@ -9,6 +9,8 @@ rename-icon: bitwig-studio
 finish-args:
   - --device=all
   - --filesystem=home
+  - --filesystem=/usr/lib64/vst
+  - --filesystem=/usr/lib/vst
   - --persist=~/.java
   - --share=ipc
   - --share=network
@@ -27,7 +29,7 @@ modules:
   - name: "bitwig-studio"
     buildsystem: simple
     build-commands:
-      - ar x bitwig-studio-3.0.deb
+      - ar x bitwig-studio-3.0.1.deb
       - tar -xf data.tar.xz
       - mkdir -p /opt /app/bin /app/lib
       - cp -r opt/* /app
@@ -42,8 +44,8 @@ modules:
       - update-mime-database /app/share/mime
     sources:
       - type: file
-        url: https://downloads-na.bitwig.com/stable/3.0/bitwig-studio-3.0.deb
-        sha512: d87323e3fd9e538356158c1f3ac5e5b88f74b92e0988c02c327d163d4e69d2b71ded0b05e5b6b3ac57353c2804eec1bde998cc8e9f032d45d57587f053f26e4c
+        url: https://downloads-na.bitwig.com/stable/3.0.1/bitwig-studio-3.0.1.deb
+        sha512: 39e73910da3fb03303ad918640f02a9968d709c760057107fed47f044029c3d642821c2949ec2d70812a5a12b05edcf1b4524e0cf5d1bf9355e52f1f1f8a0685
         only-arches:
           - x86_64
           - i386
