@@ -11,10 +11,7 @@ clean:
 	rm -fr repo-build
 	rm -fr .flatpak-builder/builds
 
-clean-all:
-	rm -fr build
-	rm -fr repo
-	rm -fr repo-build
+clean-all: clean
 	rm -fr .flatpak-builder
 
 run: build
@@ -23,7 +20,7 @@ run: build
 run-installed: build install
 	flatpak run --log-session-bus --log-system-bus com.bitwig.BitwigStudio
 
-debug-shell:
+debug-shell: build
 	flatpak-builder --run build/ com.bitwig.BitwigStudio.yaml sh
 
 uninstall:
@@ -32,4 +29,4 @@ uninstall:
 get-sum:
 	curl -s $(url) | sha512sum
 
-all: clean build install
+all: clean-all build install
