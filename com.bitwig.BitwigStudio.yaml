@@ -1,7 +1,7 @@
 ---
 app-id: com.bitwig.BitwigStudio
 command: com.bitwig.BitwigStudio
-runtime-version: "3.34"
+runtime-version: "3.36"
 runtime: org.gnome.Platform
 sdk: org.gnome.Sdk
 rename-desktop-file: bitwig-studio.desktop
