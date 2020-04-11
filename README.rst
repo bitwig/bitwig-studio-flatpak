@@ -2,6 +2,7 @@ Flatpak packaging for Bitwig Studio
 ===================================
 
 This is an attempt at packaging Bitwig Studio using Flatpak for Linux.
+**Don't use it yet!**
 
 Instructions
 ============
