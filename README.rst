@@ -9,7 +9,7 @@ Instructions
 
 * Install flatpak and flatpak-builder.
 * flatpak remote-add --if-not-exists fdsdk https://cache.sdk.freedesktop.org/freedesktop-sdk.flatpakrepo
-* flatpak install fdsdk org.freedesktop.Sdk//19.08
+* flatpak install fdsdk org.freedesktop.Sdk//20.08beta
 * make run
 
 Known Issues
