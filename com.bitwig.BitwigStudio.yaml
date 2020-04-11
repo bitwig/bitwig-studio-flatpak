@@ -8,6 +8,7 @@ rename-desktop-file: bitwig-studio.desktop
 rename-icon: bitwig-studio
 finish-args:
   - --device=all
+  - --filesystem=host
   - --filesystem=home
   - --filesystem=/usr/lib64/vst
   - --filesystem=/usr/lib/vst
@@ -18,13 +19,6 @@ finish-args:
   - --socket=wayland
   - --socket=x11
   - --talk-name=org.freedesktop.Notifications
-cleanup:
-  - /include
-  - /lib/pkgconfig
-  - /share/aclocal
-  - /share/man
-  - '*.a'
-  - '*.la'
 modules:
   - name: "bitwig-studio"
     buildsystem: simple
@@ -48,63 +42,8 @@ modules:
         sha512: 02b6c9c21bd0924370b32f2132d943a245d8410be0b57850aeedf75d8ba98d92b6b1816b42300910d59d935f9a4b0a865b37b4b0edd67f347e603bf5ad0106ea
         only-arches:
           - x86_64
-          - i386
       - type: file
         path: "files/com.bitwig.BitwigStudio"
         sha512: 65f89bb610bf59bb16978a256f4297929ccaa97f5c5b48696b3c50386e96e528f872f346785c6066be592c371f1d1c5a41d641a32479152777bf691605ad3d7b
-  - name: ffmpeg
-    cleanup:
-      - /include
-      - /lib/pkgconfig
-      - /share/ffmpeg/examples
-    config-opts:
-      - --disable-doc
-      - --disable-static
-      - --enable-shared
-    sources:
-      - type: git
-        url: "https://github.com/FFmpeg/FFmpeg.git"
-        tag: "n4.2.1"
-  - name: jack2
-    buildsystem: simple
-    build-commands:
-      - python3 waf configure --prefix=/app --htmldir=/app/share/doc/jack/ --autostart=default
-      - python3 waf build -j $FLATPAK_BUILDER_N_JOBS
-      - python3 waf install
-    cleanup:
-      - /share
-    sources:
-      - type: git
-        url: "https://github.com/jackaudio/jack2.git"
-        tag: "v1.9.14"
-  - name: libbsd
-    buildsystem: autotools
-    cleanup:
-      - "*.la"
-      - "*.a"
-      - "debug/"
-      - "pkgconfig/"
-    sources:
-      - type: git
-        url: "https://gitlab.freedesktop.org/libbsd/libbsd.git"
-        tag: "0.10.0"
-  - name: libbz2
-    buildsystem: simple
-    build-commands:
-      - make -f Makefile-libbz2_so
-      - mv libbz2.so.1.0.8 libbz2.so.1.0 /app/lib/
-    sources:
-      - type: archive
-        url: "https://fossies.org/linux/misc/bzip2-1.0.8.tar.gz"
-        sha512: 083f5e675d73f3233c7930ebe20425a533feedeaaa9d8cc86831312a6581cefbe6ed0d08d2fa89be81082f2a5abdabca8b3c080bf97218a1bd59dc118a30b9f3
-  - name: dbus-python
-    buildsystem: simple
-    build-commands:
-      - pip3 install --install-option="--prefix=/app" --no-deps .
-    sources:
-      - type: git
-        url: https://gitlab.freedesktop.org/dbus/dbus-python
-        tag: dbus-python-1.2.8
-
 
 # vim: set expandtab tabstop=2 sw=2:
