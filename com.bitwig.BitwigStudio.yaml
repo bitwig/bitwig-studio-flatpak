@@ -29,8 +29,8 @@ modules:
       - cp -r opt/* /app
       - cp -r usr/* /app
     post-install:
-      - rm -f /app/bin/bitwig-studio
-      - install -Dm555 -t /app/bin com.bitwig.BitwigStudio
+      - rm /app/bin/bitwig-studio
+      - ln -s /app/bitwig-studio/bitwig-studio /app/bin/com.bitwig.BitwigStudio
       - mv /app/share/mime/packages/bitwig-studio.xml /app/share/mime/packages/com.bitwig.BitwigStudio.xml
       - sed -ri 's@/usr/bin/bitwig-studio@/app/bin/com.bitwig.BitwigStudio@' /app/share/applications/bitwig-studio.desktop
       - sed -ri 's@Multimedia;@@' /app/share/applications/bitwig-studio.desktop
@@ -42,8 +42,5 @@ modules:
         sha512: 02b6c9c21bd0924370b32f2132d943a245d8410be0b57850aeedf75d8ba98d92b6b1816b42300910d59d935f9a4b0a865b37b4b0edd67f347e603bf5ad0106ea
         only-arches:
           - x86_64
-      - type: file
-        path: "files/com.bitwig.BitwigStudio"
-        sha512: 65f89bb610bf59bb16978a256f4297929ccaa97f5c5b48696b3c50386e96e528f872f346785c6066be592c371f1d1c5a41d641a32479152777bf691605ad3d7b
 
 # vim: set expandtab tabstop=2 sw=2:
