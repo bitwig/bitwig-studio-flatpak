@@ -33,7 +33,7 @@ modules:
       - cp -r usr/* /app
     post-install:
       - rm /app/bin/bitwig-studio
-      - mv /app/bitwig-studio /app/bin/com.bitwig.BitwigStudio
+      - ln -s ../bitwig-studio /app/bin/com.bitwig.BitwigStudio
       - mv /app/share/mime/packages/bitwig-studio.xml /app/share/mime/packages/com.bitwig.BitwigStudio.xml
       - sed -ri 's@/usr/bin/bitwig-studio@/app/bin/com.bitwig.BitwigStudio@' /app/share/applications/bitwig-studio.desktop
       - sed -ri 's@Multimedia;@@' /app/share/applications/bitwig-studio.desktop
