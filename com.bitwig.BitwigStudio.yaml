@@ -1,7 +1,7 @@
 ---
 app-id: com.bitwig.BitwigStudio
 command: com.bitwig.BitwigStudio
-runtime-version: "19.08"
+runtime-version: "20.08beta"
 runtime: org.freedesktop.Platform
 sdk: org.freedesktop.Sdk
 rename-desktop-file: bitwig-studio.desktop
