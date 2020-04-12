@@ -1,6 +1,6 @@
 build: com.bitwig.BitwigStudio.yaml
-	flatpak-builder --install-deps-from=flathub --force-clean -v build com.bitwig.BitwigStudio.yaml
-	flatpak-builder --install-deps-from=flathub --force-clean -v --repo=repo repo-build com.bitwig.BitwigStudio.yaml
+	flatpak-builder --install-deps-from=fdsdk --force-clean -v build com.bitwig.BitwigStudio.yaml
+	flatpak-builder --install-deps-from=fdsdk --force-clean -v --repo=repo repo-build com.bitwig.BitwigStudio.yaml
 
 install: build
 	flatpak-builder --user --install --force-clean build com.bitwig.BitwigStudio.yaml
