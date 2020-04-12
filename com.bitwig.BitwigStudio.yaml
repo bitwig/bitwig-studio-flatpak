@@ -11,6 +11,13 @@ finish-args:
   - --nodevice=kvm
   - --filesystem=~/.BitwigStudio
   - --filesystem=~/Bitwig Studio
+  - --filesystem=xdg-desktop
+  - --filesystem=xdg-music
+  - --filesystem=xdg-documents
+  - --filesystem=xdg-downloads
+  - --filesystem=xdg-public-share
+  - --filesystem=xdg-data
+  - --filesystem=xdg-videos
   - --filesystem=/usr/lib64/vst
   - --filesystem=/usr/lib32/vst
   - --filesystem=/usr/lib/vst
