@@ -8,7 +8,9 @@ rename-desktop-file: bitwig-studio.desktop
 rename-icon: bitwig-studio
 finish-args:
   - --device=all
-  - --filesystem=home
+  - --nodevice=kvm
+  - --filesystem=~/.BitwigStudio
+  - --filesystem=~/Bitwig Studio
   - --filesystem=/usr/lib64/vst
   - --filesystem=/usr/lib32/vst
   - --filesystem=/usr/lib/vst
