@@ -7,30 +7,54 @@ sdk: org.freedesktop.Sdk
 rename-desktop-file: bitwig-studio.desktop
 rename-icon: bitwig-studio
 finish-args:
+  # TODO: we need MIDI, Audio, DRI, and realtime performances
   - --device=all
   - --nodevice=kvm
+
+  # Needed to talk with jack, pulseaudio or pipewire
+  - --share=ipc
+
+  # Needed for updating the sound content, checking for online notifications and authentication
+  - --share=network
+
+  # Self explanatory
+  - --socket=pulseaudio
+  - --socket=wayland
+  - --socket=x11
+
+  # For desktop notifications
+  - --talk-name=org.freedesktop.Notifications
+
+  # Bitwig Studio specific folders
   - --filesystem=~/.BitwigStudio
   - --filesystem=~/Bitwig Studio
-  - --filesystem=xdg-desktop
-  - --filesystem=xdg-music
-  - --filesystem=xdg-documents
-  - --filesystem=xdg-downloads
-  - --filesystem=xdg-public-share
-  - --filesystem=xdg-data
-  - --filesystem=xdg-videos
+
+  # Standard Plugin folders
+  - --filesystem=~/.vst
+  - --filesystem=~/.vst3
   - --filesystem=/usr/lib64/vst
   - --filesystem=/usr/lib32/vst
   - --filesystem=/usr/lib/vst
   - --filesystem=/usr/local/lib64/vst
   - --filesystem=/usr/local/lib32/vst
   - --filesystem=/usr/local/lib/vst
+
+  # Extra plugin folder
+  - --filesystem=~/.u-he
+
+  # Convenient folders
+  - --filesystem=xdg-desktop
+  - --filesystem=xdg-music
+  - --filesystem=xdg-documents
+  - --filesystem=xdg-downloads
+  - --filesystem=xdg-public-share
+  - --filesystem=xdg-data
+  - --filesystem=xdg-templates # might be needed by plugins
+  - --filesystem=xdg-config    # might be needed by plugins
+
+  # Java stuff
   - --persist=~/.java
-  - --share=ipc
-  - --share=network
-  - --socket=pulseaudio
-  - --socket=wayland
-  - --socket=x11
-  - --talk-name=org.freedesktop.Notifications
+
 modules:
   - name: "bitwig-studio"
     buildsystem: simple
