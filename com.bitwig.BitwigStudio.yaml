@@ -46,7 +46,7 @@ finish-args:
   - --filesystem=xdg-desktop
   - --filesystem=xdg-music
   - --filesystem=xdg-documents
-  - --filesystem=xdg-downloads
+  - --filesystem=xdg-download
   - --filesystem=xdg-public-share
   - --filesystem=xdg-data
   - --filesystem=xdg-templates # might be needed by plugins
