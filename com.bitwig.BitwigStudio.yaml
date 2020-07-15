@@ -1,7 +1,7 @@
 ---
 app-id: com.bitwig.BitwigStudio
-command: com.bitwig.BitwigStudio
-runtime-version: "20.08beta"
+command: bitwig-studio
+runtime-version: "19.08"
 runtime: org.freedesktop.Platform
 sdk: org.freedesktop.Sdk
 rename-desktop-file: bitwig-studio.desktop
@@ -11,7 +11,7 @@ finish-args:
   - --device=all
   - --nodevice=kvm
 
-  # Needed to talk with jack, pulseaudio or pipewire
+  # Needed to talk with pulseaudio or pipewire
   - --share=ipc
 
   # Needed for updating the sound content, checking for online notifications and authentication
@@ -25,56 +25,43 @@ finish-args:
   # For desktop notifications
   - --talk-name=org.freedesktop.Notifications
 
-  # Bitwig Studio specific folders
-  - --filesystem=~/.BitwigStudio
-  - --filesystem=~/Bitwig Studio
-
-  # Standard Plugin folders
-  - --filesystem=~/.vst
-  - --filesystem=~/.vst3
-  - --filesystem=/usr/lib64/vst
-  - --filesystem=/usr/lib32/vst
-  - --filesystem=/usr/lib/vst
-  - --filesystem=/usr/local/lib64/vst
-  - --filesystem=/usr/local/lib32/vst
-  - --filesystem=/usr/local/lib/vst
-
-  # Extra plugin folder
-  - --filesystem=~/.u-he
-
-  # Convenient folders
-  - --filesystem=xdg-desktop
-  - --filesystem=xdg-music
-  - --filesystem=xdg-documents
-  - --filesystem=xdg-download
-  - --filesystem=xdg-public-share
-  - --filesystem=xdg-data
-  - --filesystem=xdg-templates # might be needed by plugins
-  - --filesystem=xdg-config    # might be needed by plugins
+  # Give access to HOME
+  - --filesystem=home
 
   # Java stuff
   - --persist=~/.java
+
+  - --env=ALSA_CONFIG_PATH=
+  - --env=VST_PATH=/app/extensions/Plugins/lxvst
+  - --env=VST3_PATH=/app/extensions/Plugins/vst3
+
+add-extensions:
+  org.freedesktop.LinuxAudio.Plugins:
+    directory: extensions/Plugins
+    version: '19.08'
+    add-ld-path: lib
+    merge-dirs: lxvst;vst3
+    subdirectories: true
+    no-autodownload: true
 
 modules:
   - name: "bitwig-studio"
     buildsystem: simple
     build-commands:
-      - ar x bitwig-studio-3.2.deb
+      - ar x bitwig-studio-*.deb
       - tar -xf data.tar.xz
       - mkdir -p /opt /app/bin /app/lib
       - cp -r opt/bitwig-studio/* /app
       - cp -r usr/* /app
     post-install:
-      - rm /app/bin/bitwig-studio
-      - ln -s ../bitwig-studio /app/bin/com.bitwig.BitwigStudio
+      - ln -sf ../bitwig-studio ${FLATPAK_DEST}/bin/
       - mv /app/share/mime/packages/bitwig-studio.xml /app/share/mime/packages/com.bitwig.BitwigStudio.xml
-      - sed -ri 's@/usr/bin/bitwig-studio@/app/bin/com.bitwig.BitwigStudio@' /app/share/applications/bitwig-studio.desktop
-      - sed -ri 's@bitwig-studio.png@com.bitwig.BitwigStudio@' /app/share/applications/bitwig-studio.desktop
-      - update-mime-database /app/share/mime
+      - sed -ri 's@/usr/bin/bitwig-studio@bitwig-studio@' /app/share/applications/bitwig-studio.desktop
+      - install -d /app/extensions/Plugins
     sources:
       - type: file
-        url: https://downloads-na.bitwig.com/stable/3.2/bitwig-studio-3.2.deb
-        sha512: 26c87fdd195e18f4731a65226043754229701858ad0b9f0917f4a212d4e867c5a6b272a9d1514cf97337bc238f0f5cb5a16dfda3759314da8d227efe83dd8e0b
+        url: https://downloads.bitwig.com/stable/3.2.4/bitwig-studio-3.2.4.deb
+        sha512: 933cf02023e361557660b377f2e58655c035e6df850edf21d30cd71a4c790e77aaf9797090a0ba6b259c309bdc87fa7e73821064d06613806e48610dc37b3f8e
         only-arches:
           - x86_64
 
