@@ -56,7 +56,7 @@ modules:
     post-install:
       - ln -sf ../bitwig-studio ${FLATPAK_DEST}/bin/
       - mv /app/share/mime/packages/bitwig-studio.xml /app/share/mime/packages/com.bitwig.BitwigStudio.xml
-      - sed -ri 's@/usr/bin/bitwig-studio@bitwig-studio@' /app/share/applications/bitwig-studio.desktop
+      - sed -ri 's@"/usr/bin/bitwig-studio"@bitwig-studio@' /app/share/applications/bitwig-studio.desktop
       - install -d /app/extensions/Plugins
     sources:
       - type: file
