@@ -11,6 +11,10 @@ finish-args:
   - --device=all
   - --nodevice=kvm
 
+  # pipewire
+  - --filesystem=xdg-run/pipewire-0
+  - --socket=system-bus
+
   # Needed to talk with pulseaudio or pipewire
   - --share=ipc
 
