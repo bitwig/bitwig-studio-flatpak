@@ -54,17 +54,18 @@ modules:
     build-commands:
       - ar x bitwig-studio-*.deb
       - tar -xf data.tar.xz
-      - mkdir -p /opt /app/bin /app/lib
-      - cp -r opt/bitwig-studio/* /app
-      - cp -r usr/* /app
+      - mkdir -p ${FLATPAK_DEST}/bin ${FLATPAK_DEST}/lib
+      - cp -r opt/bitwig-studio/* ${FLATPAK_DEST}
+      - cp -r usr/* ${FLATPAK_DEST}
     post-install:
       - ln -sf ../bitwig-studio ${FLATPAK_DEST}/bin/
-      - mv /app/share/mime/packages/bitwig-studio.xml /app/share/mime/packages/com.bitwig.BitwigStudio.xml
-      - sed -ri 's@"/usr/bin/bitwig-studio"@bitwig-studio@' /app/share/applications/bitwig-studio.desktop
+      - mv ${FLATPAK_DEST}/share/mime/packages/bitwig-studio.xml ${FLATPAK_DEST}/share/mime/packages/com.bitwig.BitwigStudio.xml
+      - sed -ri 's@"/usr/bin/bitwig-studio"@bitwig-studio@' ${FLATPAK_DEST}/share/applications/bitwig-studio.desktop
       - cd ${FLATPAK_DEST}/share/icons/hicolor/scalable/mimetypes/;
         for i in * ; do
           mv $i ${FLATPAK_ID}.$i;
         done
+      - install -Dm644 -t ${FLATPAK_DEST}/share/metainfo com.bitwig.BitwigStudio.appdata.xml
       - install -d /app/extensions/Plugins
     sources:
       - type: file
@@ -72,5 +73,7 @@ modules:
         sha512: 0ae8206cc811c7e0f0826e389396ce0aa13e2d34f9a9e96977bf0b103bb5f368d1842a2dcbefb146467515556e1748e24754eeef1915301ea4ea3b4d9d9eb99b
         only-arches:
           - x86_64
+      - type: file
+        path: com.bitwig.BitwigStudio.appdata.xml
 
 # vim: set expandtab tabstop=2 sw=2:
