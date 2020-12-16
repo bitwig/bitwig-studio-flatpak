@@ -11,9 +11,8 @@ Instructions
 ============
 
 * Install flatpak and flatpak-builder.
-* flatpak remote-add --if-not-exists fdsdk https://cache.sdk.freedesktop.org/freedesktop-sdk.flatpakrepo
-* flatpak install fdsdk org.freedesktop.Sdk/x86_64/20.08
-* flatpak install fdsdk org.freedesktop.Platform/x86_64/20.08
+* flatpak install org.freedesktop.Sdk/x86_64/20.08
+* flatpak install org.freedesktop.Platform/x86_64/20.08
 * make run
 
 Known Issues
