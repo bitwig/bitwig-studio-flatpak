@@ -27,6 +27,6 @@ uninstall:
 	flatpak remove -y com.bitwig.BitwigStudio
 
 get-sum:
-	curl -s $(url) | sha512sum
+	curl -sL $(url) | sha512sum
 
 all: clean-all build install
