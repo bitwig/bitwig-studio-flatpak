@@ -29,6 +29,9 @@ finish-args:
   # For desktop notifications
   - --talk-name=org.freedesktop.Notifications
 
+  # For secrets communication
+  - --talk-name=org.freedesktop.secrets
+
   # Give access to HOME
   - --filesystem=home
 
@@ -69,8 +72,8 @@ modules:
       - install -d /app/extensions/Plugins
     sources:
       - type: file
-        url: https://downloads.bitwig.com/stable/3.3.2/bitwig-studio-3.3.2.deb
-        sha512: f39094902255846d447fa0731c56b8d3096a495777548da7aadb2fdfabd1746cab3ce9ff5d1baee037311d955b7b7f1581eaea1e04406516d3f90e1ef9409058
+        url: https://downloads.bitwig.com/stable/3.3.3/bitwig-studio-3.3.3.deb
+        sha512: be8b02d4c90ea7558787c9bc0a38c4506da3bfd18dd20e36d2abbf46671d7ce52c40631a6f6cda15cc6d926f8d19595387734ad56a71f9250065f3a60f480df7
         only-arches:
           - x86_64
       - type: file
