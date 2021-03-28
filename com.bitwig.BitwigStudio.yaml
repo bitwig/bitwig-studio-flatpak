@@ -72,8 +72,8 @@ modules:
       - install -d /app/extensions/Plugins
     sources:
       - type: file
-        url: https://downloads.bitwig.com/stable/3.3.5/bitwig-studio-3.3.5.deb
-        sha512: 427fe4bff99070aeb8aa63014cccaebc734f099169945ec1f5d7443fc52dd721c4e313e8061340683c402262832b10c95836f364456bc1ec221d81684f7a16a7
+        url: https://downloads.bitwig.com/stable/3.3.6/bitwig-studio-3.3.6.deb
+        sha512: 973d09c1ad0a69d9fcf7634adea50b7a04db1291064cd6f1e3fd54414a4be7ba1b6e3ded4e206c4db50fb54af161dad153e57230f80c0fcecbc82d7bc1b5b407
         only-arches:
           - x86_64
       - type: file
