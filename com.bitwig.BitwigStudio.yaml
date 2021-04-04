@@ -55,8 +55,7 @@ modules:
   - name: "bitwig-studio"
     buildsystem: simple
     build-commands:
-      - ar x bitwig-studio-*.deb
-      - tar -xf data.tar.xz
+      - ar p bitwig-studio-*.deb data.tar.xz | tar -xJf -
       - mkdir -p ${FLATPAK_DEST}/bin ${FLATPAK_DEST}/lib
       - cp -r opt/bitwig-studio/* ${FLATPAK_DEST}
       - cp -r usr/* ${FLATPAK_DEST}
