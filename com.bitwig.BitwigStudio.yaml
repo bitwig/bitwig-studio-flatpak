@@ -6,11 +6,10 @@ runtime: org.freedesktop.Platform
 sdk: org.freedesktop.Sdk
 rename-desktop-file: bitwig-studio.desktop
 rename-icon: bitwig-studio
-rename-appdata-file: 'bitwig-studio.appdata.xml'
+#rename-appdata-file: 'bitwig-studio.appdata.xml'
 finish-args:
-  # TODO: we need MIDI, Audio, DRI, and realtime performances
+  # We need MIDI, Audio, USB, DRI, and realtime performances
   - --device=all
-  - --nodevice=kvm
 
   # Needed to talk with X11, Wayland, pulseaudio and pipewire
   - --share=ipc
@@ -30,6 +29,8 @@ finish-args:
 
   # Java stuff
   - --persist=~/.java
+  - --persist=~/.BitwigStudio
+  - --persist=~/Bitwig\ Studio
 
   - --env=ALSA_CONFIG_PATH=
   - --env=VST_PATH=/app/extensions/Plugins/lxvst
@@ -50,6 +51,7 @@ modules:
     build-commands:
       - ar p bitwig-studio-*.deb data.tar.xz | tar -xJf -
       - mkdir -p ${FLATPAK_DEST}/bin ${FLATPAK_DEST}/lib
+      - rm usr/share/metainfo/bitwig-studio.appdata.xml
       - cp -r opt/bitwig-studio/* ${FLATPAK_DEST}
       - cp -r usr/* ${FLATPAK_DEST}
     post-install:
