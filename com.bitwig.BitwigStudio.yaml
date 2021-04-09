@@ -64,6 +64,7 @@ modules:
           mv $i ${FLATPAK_ID}.$i;
         done
       - install -d /app/extensions/Plugins
+    rename-appdata-file: 'bitwig-studio.appdata.xml'
     sources:
       - type: file
         url: https://downloads.bitwig.com/stable/3.3.7/bitwig-studio-3.3.7.deb
