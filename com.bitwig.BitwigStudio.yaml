@@ -11,19 +11,15 @@ finish-args:
   - --device=all
   - --nodevice=kvm
 
-  # pipewire
-  - --filesystem=xdg-run/pipewire-0
-
-  # Needed to talk with pulseaudio or pipewire
+  # Needed to talk with X11, Wayland, pulseaudio and pipewire
   - --share=ipc
-
-  # Needed for updating the sound content, checking for online notifications and authentication
-  - --share=network
-
-  # Self explanatory
+  - --filesystem=xdg-run/pipewire-0
   - --socket=pulseaudio
   - --socket=wayland
   - --socket=x11
+
+  # Needed for updating the sound content, checking for online notifications and authentication
+  - --share=network
 
   # For desktop notifications
   - --talk-name=org.freedesktop.Notifications
