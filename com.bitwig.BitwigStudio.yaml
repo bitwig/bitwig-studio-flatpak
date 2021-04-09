@@ -63,7 +63,6 @@ modules:
         for i in * ; do
           mv $i ${FLATPAK_ID}.$i;
         done
-      - install -Dm644 -t ${FLATPAK_DEST}/share/metainfo com.bitwig.BitwigStudio.appdata.xml
       - install -d /app/extensions/Plugins
     sources:
       - type: file
@@ -71,7 +70,5 @@ modules:
         sha512: 62f6594133bf27e15781c8c8a103c46b3a4f2798a250f5c30a35af378eea8766575a6123777f27cf287bf817270d51f4e6560ab9c8ae87c64b5ebdacc6d44f39
         only-arches:
           - x86_64
-      - type: file
-        path: com.bitwig.BitwigStudio.appdata.xml
 
 # vim: set expandtab tabstop=2 sw=2:
