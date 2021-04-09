@@ -6,7 +6,6 @@ runtime: org.freedesktop.Platform
 sdk: org.freedesktop.Sdk
 rename-desktop-file: bitwig-studio.desktop
 rename-icon: bitwig-studio
-rename-appdata-file: bitwig-studio.appdata.xml
 finish-args:
   # TODO: we need MIDI, Audio, DRI, and realtime performances
   - --device=all
@@ -61,12 +60,12 @@ modules:
           mv $i ${FLATPAK_ID}.$i;
         done
       - install -d /app/extensions/Plugins
+    rename-appdata-file: 'bitwig-studio.appdata.xml'
+    rename-desktop-file: 'bitwig-studio.desktop'
     sources:
-      - type: extra-data
-        filename: bitwig-studio-3.3.7.deb
+      - type: file
         url: https://downloads.bitwig.com/stable/3.3.7/bitwig-studio-3.3.7.deb
-        sha256: 7fb9d1b2eb632e130d9d44ab2b51f7389131d2c11783313184b283fd6721598e
-        size: 215753720
+        sha512: 62f6594133bf27e15781c8c8a103c46b3a4f2798a250f5c30a35af378eea8766575a6123777f27cf287bf817270d51f4e6560ab9c8ae87c64b5ebdacc6d44f39
         only-arches:
           - x86_64
 
