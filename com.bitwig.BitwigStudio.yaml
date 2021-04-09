@@ -61,6 +61,7 @@ modules:
         done
       - install -d /app/extensions/Plugins
     rename-appdata-file: 'bitwig-studio.appdata.xml'
+    rename-desktop-file: 'bitwig-studio.desktop'
     sources:
       - type: file
         url: https://downloads.bitwig.com/stable/3.3.7/bitwig-studio-3.3.7.deb
