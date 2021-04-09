@@ -29,9 +29,6 @@ finish-args:
   # For desktop notifications
   - --talk-name=org.freedesktop.Notifications
 
-  # For secrets communication
-  - --talk-name=org.freedesktop.secrets
-
   # Give access to HOME
   - --filesystem=home
 
